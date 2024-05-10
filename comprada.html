@@ -1,30 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compra Efetuada</title>
-    <script src="./jquery-3.7.1.min.js"></script>
-    <script src="./script.js"></script>
+    <title>Passagem</title>
 </head>
 <body>
-    <h1>Compra Efetuada</h1>
-    <div id="passagemInfo"></div>
+    <!-- informções da passagem -->
+
+    
 </body>
-<script>
-    $(document).ready(function() {
-        // Obtém as informações da passagem após o carregamento da página
-        $.ajax({
-            type: 'GET',
-            url: './php/get_passagem_info.php', // Endpoint para obter as informações da passagem do backend
-            success: function(response) {
-                $('#passagemInfo').html(response); // Exibe as informações da passagem na página
-            },
-            error: function(xhr, status, error) {
-                console.error('Erro ao obter informações da passagem:', error);
-                // Tratar erro de obtenção das informações aqui
-            }
-        });
-    });
-</script>
 </html>

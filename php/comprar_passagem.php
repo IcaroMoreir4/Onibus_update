@@ -1,5 +1,8 @@
 <?php
 
+require_once('./Passagem.php');
+require_once('./bd/PassagemDAO.php');
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!empty($_POST['nome']) && !empty($_POST['cpf']) && !empty($_POST['telefone']) && !empty($_POST['viagem'])) {
