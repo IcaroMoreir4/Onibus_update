@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra de Passagem</title>
+    <script src="./jquery-3.7.1.min.js"></script>
+    <script src="./script.js"></script>
+</head>
+<body>
+    <h1>Compra de Passagem</h1>
+    <form id="compraForm" action="./php/comprar_passagem.php" method="POST">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" name="cpf" required>
+
+        <label for="telefone">Telefone:</label>
+        <input type="text" id="telefone" name="telefone" required>
+
+        <label for="viagem">Viagem:</label>
+        <select id="viagem" name="viagem" required>
+            <option value="a-b">De A para B (R$10,00)</option>
+            <option value="a-c">De A para C (R$20,00)</option>
+        </select>
+
+        <button type="submit" id="comprarButton">Comprar Passagem</button>
+    </form>
+</body>
+</html>
