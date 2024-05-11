@@ -18,4 +18,12 @@ $(document).ready(function() {
             }
         });
     });
+
+    // COMPRADA
+
+    
+    
 });
+
+
+

@@ -3,13 +3,13 @@
 class Passageiro {
     private $passageiro_id;
     private $nome;
-    private $cpf;
+    private $CPF;
     private $telefone;
 
-    public function __construct($passageiro_id, $nome, $cpf, $telefone) {
+    public function __construct($passageiro_id, $nome, $CPF, $telefone) {
         $this->passageiro_id = $passageiro_id;
         $this->nome = $nome;
-        $this->cpf = $cpf;
+        $this->CPF = $CPF;
         $this->telefone = $telefone;
     }
 
@@ -28,10 +28,10 @@ class Passageiro {
     }
 
     public function getCpf() {
-        return $this->cpf;
+        return $this->CPF;
     }
     public function setCpf($c) {
-        $this->cpf = $c;
+        $this->CPF = $c;
     }
 
     public function getTelefone() {

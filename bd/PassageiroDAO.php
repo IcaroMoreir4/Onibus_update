@@ -2,16 +2,17 @@
 
 class PassageiroDAO{
 
-    public function create (Passageiro $passageiro){
-        $sql = 'INSERT INTO passageiro (passageiro_id, nome, cpf, telefone) VALUES (?,?,?,?)';
+    public function create(Passageiro $passageiro) {
+        $sql = 'INSERT INTO passageiro (nome, CPF, telefone) VALUES (?, ?, ?)';
         $stmt = Conexao::getConn()->prepare($sql);
-        $stmt->bindValue(1, $passageiro->getPassageiroID());
-        $stmt->bindValue(2, $passageiro->getNome());
-        $stmt->bindValue(3, $passageiro->getCpf());
-        $stmt->bindValue(4, $passageiro->getTelefone());
-
+        $stmt->bindValue(1, $passageiro->getNome());
+        $stmt->bindValue(2, $passageiro->getCpf());
+        $stmt->bindValue(3, $passageiro->getTelefone());
+    
         $stmt->execute();
-    }
+    
+        return Conexao::getConn()->lastInsertId(); // Retorna o ID inserido
+    }    
 
     public function read(){
         $sql = 'SELECT * FROM passageiro';
@@ -27,7 +28,7 @@ class PassageiroDAO{
     }
     
     public function update(Passageiro $passageiro) {
-        $sql = 'UPDATE passageiro SET nome = ?, cpf = ?, telefone = ? WHERE passageiro_id = ?';
+        $sql = 'UPDATE passageiro SET nome = ?, CPF = ?, telefone = ? WHERE passageiro_id = ?';
         $stmt = Conexao::getConn()->prepare($sql);
     
         $stmt->bindValue(1, $passageiro->getNome());

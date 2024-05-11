@@ -3,16 +3,25 @@
 class PassagemDAO{
     
     public function create (Passagem $passagem){
-        $sql = 'INSERT INTO passagem (passagem_id, data_compra, valor, viagem_id, passageiro_id) VALUES (?,?,?,?,?)';
+        $sql = 'INSERT INTO passagem (data_compra, valor, viagem_id, passageiro_id) VALUES (?, ?, ?, ?)';
         $stmt = Conexao::getConn()->prepare($sql);
-        $stmt->bindValue(1, $passagem->getPassagemID());
-        $stmt->bindValue(2, $passagem->getDataCompra());
-        $stmt->bindValue(3, $passagem->getValor());
-        $stmt->bindValue(4, $passagem->getViagemID());
-        $stmt->bindValue(5, $passagem->getPassageiroID());
-
-        $stmt->execute();
+        $stmt->bindValue(1, $passagem->getDataCompra());
+        $stmt->bindValue(2, $passagem->getValor());
+        $stmt->bindValue(3, $passagem->getViagemID());
+        $stmt->bindValue(4, $passagem->getPassageiroID());
+    
+        $result = $stmt->execute();
+        
+        // Verifique se a execução da consulta foi bem-sucedida
+        if ($result) {
+            return true;
+        } else {
+            // Se houver algum erro, imprima a mensagem de erro para debug
+            echo "Erro ao criar passagem: " . $stmt->errorInfo()[2];
+            return false;
+        }
     }
+    
 
     public function read(){
         $sql = 'SELECT * FROM passagem';
