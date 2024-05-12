@@ -6,12 +6,17 @@ class PassageiroDAO{
         $sql = 'INSERT INTO passageiro (nome, CPF, telefone) VALUES (?, ?, ?)';
         $stmt = Conexao::getConn()->prepare($sql);
         $stmt->bindValue(1, $passageiro->getNome());
-        $stmt->bindValue(2, $passageiro->getCpf());
+        $stmt->bindValue(2, $passageiro->getCPF());
         $stmt->bindValue(3, $passageiro->getTelefone());
     
-        $stmt->execute();
+        $result = $stmt->execute();
     
-        return Conexao::getConn()->lastInsertId(); // Retorna o ID inserido
+        if ($result) {
+            return Conexao::getConn()->lastInsertId();
+        } else {
+            echo "Erro ao criar passageiro: " . $stmt->errorInfo()[2];
+            return false;
+        }
     }    
 
     public function read(){
@@ -25,6 +30,17 @@ class PassageiroDAO{
         } else {
             return [];
         }
+    }
+
+    public function readPassageiroById($passageiroId){
+        $sql = 'SELECT * FROM passagem WHERE passagem_id = ?';
+        $stmt = Conexao::getConn()->prepare($sql);
+        $stmt->bindValue(1, $passageiroId);
+        $stmt->execute();
+    
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC); // Assume-se que apenas uma passagem será retornada
+    
+        return $resultado ? $resultado : null; // Retorna a passagem encontrada ou null se não encontrou
     }
     
     public function update(Passageiro $passageiro) {

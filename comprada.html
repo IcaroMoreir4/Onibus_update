@@ -1,20 +1,44 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Passagem</title>
-    <script src="./script.js"></script>
+    <title>Detalhes da Passagem</title>
+    <link rel="stylesheet" href="./style.css"> 
 </head>
-<body>
-    <!-- informções da passagem -->
+<body class="body-passagem">
+    <div class="passagem-info">
+        <h1>Detalhes da Passagem</h1>
+        <div>
+            <p><strong>Nome do Passageiro:</strong> <span id="nomePassageiro"></span></p>
+            <p><strong>Data de Compra:</strong> <span id="dataCompra"></span></p>
+            <p><strong>Valor da Passagem:</strong> <span id="valorPassagem"></span></p>
+        </div>
+        <button class="print-button" onclick="window.print()">Imprimir</button>
+    </div>
 
-    <h1>Passagem</h1>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Obtém o ID da passagem da URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const passagemId = urlParams.get('id');
 
-    <h2>Nome:<span id="nome_passagem"></span></h2>
-    <h2>Cpf:<span></span></h2>
-    <h2>Origem:<span></span></h2>
-    <h2>Destino:<span></span></h2>
-
+            // Faz a requisição AJAX para obter os dados da passagem
+            $.ajax({
+                url: 'obter_dados_passagem.php?id=' + passagemId,
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    $('#nomePassageiro').text(response.nome);
+                    $('#dataCompra').text(response.data_compra);
+                    $('#valorPassagem').text('R$ ' + response.valor_passagem.toFixed(2));
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

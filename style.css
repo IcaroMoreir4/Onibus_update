@@ -71,3 +71,66 @@ body {
     border-color: #0056b3; 
     color: #fff; 
 }
+
+/* Estilo de comprada.html */
+
+/* Estilo do corpo da página */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f5f5; 
+}
+
+.body-passagem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5; 
+    height: 100vh; 
+}
+
+.passagem-info {
+    max-width: 500px;
+    border-radius: 10px; 
+    border: solid 1px #ccc;
+    background-color: #fff; 
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+}
+
+.passagem-info h1 {
+    margin: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.passagem-info div {
+    margin-bottom: 20px;
+}
+
+.passagem-info p {
+    margin: 0;
+    margin-bottom: 8px;
+}
+
+.passagem-info strong {
+    font-weight: bold;
+}
+
+.print-button{
+    padding: 10px 16px; 
+    margin-top: 10px;
+    text-transform: uppercase;
+    font-weight: 600;
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff; 
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.print-button:hover {
+    background-color: #0056b3; 
+    border-color: #0056b3; 
+    color: #fff; 
+}

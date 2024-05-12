@@ -35,6 +35,18 @@ class PassagemDAO{
             return [];
         }
     }
+    
+    public function readPassagemById($passagemId){
+        $sql = 'SELECT * FROM passagem WHERE passagem_id = ?';
+        $stmt = Conexao::getConn()->prepare($sql);
+        $stmt->bindValue(1, $passagemId);
+        $stmt->execute();
+    
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC); // Assume-se que apenas uma passagem será retornada
+    
+        return $resultado ? $resultado : null; // Retorna a passagem encontrada ou null se não encontrou
+    }
+    
 
     public function update(Passagem $passagem) {
         $sql = 'UPDATE passagem SET data_compra = ?, valor = ?, viagem_id = ?, passageiro_id = ? WHERE passagem_id = ?';
