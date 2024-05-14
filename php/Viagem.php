@@ -5,8 +5,8 @@ class Viagem {
     private $data_viagem;
     private $hora_inicio;
     private $hora_termino;
-    private $onibus_id; // ID do ônibus associado à viagem
-    private $motorista_id; // ID do motorista associado à viagem
+    private $onibus_id; 
+    private $motorista_id;
 
     public function __construct($viagem_id, $data_viagem, $hora_inicio, $hora_termino, $onibus_id, $motorista_id) {
         $this->viagem_id = $viagem_id;

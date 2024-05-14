@@ -31,17 +31,6 @@ class PassageiroDAO{
             return [];
         }
     }
-
-    public function readPassageiroById($passageiroId){
-        $sql = 'SELECT * FROM passagem WHERE passagem_id = ?';
-        $stmt = Conexao::getConn()->prepare($sql);
-        $stmt->bindValue(1, $passageiroId);
-        $stmt->execute();
-    
-        $resultado = $stmt->fetch(PDO::FETCH_ASSOC); // Assume-se que apenas uma passagem será retornada
-    
-        return $resultado ? $resultado : null; // Retorna a passagem encontrada ou null se não encontrou
-    }
     
     public function update(Passageiro $passageiro) {
         $sql = 'UPDATE passageiro SET nome = ?, CPF = ?, telefone = ? WHERE passageiro_id = ?';

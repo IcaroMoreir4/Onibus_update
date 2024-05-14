@@ -4,8 +4,8 @@ class Passagem {
     private $passagem_id;
     private $data_compra;
     private $valor;
-    private $viagem_id; // ID da viagem associada à passagem
-    private $passageiro_id; // ID do passageiro associado à passagem
+    private $viagem_id; 
+    private $passageiro_id;
 
     public function __construct($passagem_id, $data_compra, $valor, $viagem_id, $passageiro_id) {
         $this->passagem_id = $passagem_id;
