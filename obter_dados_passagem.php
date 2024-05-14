@@ -1,49 +1,20 @@
 <?php
-require_once 'bd/PassagemDAO.php';
-require_once 'bd/PassageiroDAO.php';
+require_once 'bd/Conexao.php';
 
-// Verifica se o ID da passagem foi enviado via GET
-if (isset($_GET['id'])) {
-    $passagemId = $_GET['id'];
-
-    // Cria uma instância do PassagemDAO
-    $passagemDAO = new PassagemDAO();
-    $passagem = $passagemDAO->readPassagemById($passagemId);
-
-    // Verifica se a passagem foi encontrada
-    if ($passagem) {
-        // Obtém o ID do passageiro associado à passagem
-        $passageiroId = $passagem['passageiro_id'];
-
-        // Cria uma instância do PassageiroDAO
-        $passageiroDAO = new PassageiroDAO();
-        $passageiro = $passageiroDAO->readPassageiroById($passageiroId);
-
-        // Verifica se o passageiro foi encontrado
-        if ($passageiro) {
-            // Monta os dados em um array para retornar em JSON
-            $data = array(
-                'nome_passageiro' => $passageiro['nome'],
-                'data_compra' => $passagem['data_compra'],
-                'valor_passagem' => $passagem['valor']
-            );
-
-            // Responde com os dados em formato JSON
-            header('Content-Type: application/json');
-            echo json_encode($data);
-        } else {
-            // Se o passageiro não foi encontrado, retorna um erro em JSON
-            header('Content-Type: application/json');
-            echo json_encode(array('error' => 'Passageiro não encontrado'));
-        }
-    } else {
-        // Se a passagem não foi encontrada, retorna um erro em JSON
-        header('Content-Type: application/json');
-        echo json_encode(array('error' => 'Passagem não encontrada'));
+function buscarPassagensPorPassageiro($passageiro_id) {
+    try {
+        $conn = Conexao::getConn();
+        $sql = "SELECT passageiro.nome, passagem.valor, passagem.data_compra, passageiro.CPF 
+                FROM passagem 
+                INNER JOIN passageiro ON passagem.passageiro_id = passageiro.passageiro_id 
+                WHERE passageiro.passageiro_id = :passageiro_id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':passageiro_id', $passageiro_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo 'Erro: ' . $e->getMessage();
+        return [];
     }
-} else {
-    // Se o ID da passagem não foi enviado, retorna um erro em JSON
-    header('Content-Type: application/json');
-    echo json_encode(array('error' => 'ID da passagem não fornecido'));
 }
 ?>

@@ -15,14 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $opcaoValor = $_POST["opcaoValor"];
 
     // Define o valor da passagem com base na opção selecionada
-    if ($opcaoValor === "a-b") {
-        $valorPassagem = 10; // Valor para a opção "De A para B"
-    } elseif ($opcaoValor === "a-c") {
-        $valorPassagem = 20; // Valor para a opção "De A para C"
-    } else {
-        // Valor padrão ou tratamento de erro, se necessário
-        $valorPassagem = 0;
-    }
+    $valorPassagem = ($opcaoValor === "a-b") ? 10 : (($opcaoValor === "a-c") ? 20 : 0);
 
     // Cria uma conexão com o banco de dados usando o padrão Singleton
     $conn = Conexao::getConn();
@@ -36,23 +29,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($passageiroId) {
         // Cria uma nova passagem com os dados
-        $passagem = new Passagem('', $data_compra, $valorPassagem, null, $passageiroId); // Deixe viagem_id como NULL
+        $passagem = new Passagem('', $data_compra, $valorPassagem, null, $passageiroId);
 
         // Insere a passagem no banco de dados
         $passagemDAO = new PassagemDAO();
         $passagemId = $passagemDAO->create($passagem);
 
         if ($passagemId) {
-            // Redireciona para a página de detalhes da passagem
-            header("Location: comprada.html?id=$passagemId");
+            // Redireciona para a página de detalhes da passagem com o ID do passageiro
+            header("Location: comprada.php?id=$passageiroId");
             exit();
         } else {
-            // Caso ocorra algum erro ao criar a passagem, redireciona para uma página de erro
             header("Location: erro.php");
             exit();
         }
     } else {
-        // Caso ocorra algum erro ao criar o passageiro, redireciona para uma página de erro
         header("Location: erro.php");
         exit();
     }

@@ -13,11 +13,4 @@ class Conexao {
     }
 }
 
-try {
-    $conn = Conexao::getConn();
-    echo "Conexão bem-sucedida!";
-} catch (\PDOException $e) {
-    echo "Erro de conexão: " . $e->getMessage();
-}
-
 ?>
